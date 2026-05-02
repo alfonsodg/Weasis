@@ -113,9 +113,9 @@
          <groupId>org.apache.maven.plugins</groupId>
          <artifactId>maven-compiler-plugin</artifactId>
          <version>3.14.1</version>
-         <configuration>
-           <release>${java-version}</release>
-         </configuration>
+          <configuration>
+            <release>${java-version}</release>
+          </configuration>
        </plugin>
        <plugin>
          <groupId>biz.aQute.bnd</groupId>
@@ -234,7 +234,7 @@
             <formats>
               <format>HTML</format>
               <format>JSON</format>
-            </forms>
+            </formats>
             <suppressionFiles>
               <suppressionFile>owasp-suppressions.xml</suppressionFile>
             </suppressionFiles>

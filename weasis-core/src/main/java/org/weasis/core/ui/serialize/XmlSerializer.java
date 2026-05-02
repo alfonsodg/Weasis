@@ -26,8 +26,10 @@ import org.slf4j.LoggerFactory;
 import org.weasis.core.api.media.data.ImageElement;
 import org.weasis.core.api.media.data.TagW;
 import org.weasis.core.api.util.GzipManager;
+import org.weasis.core.ui.model.AbstractGraphicModel;
 import org.weasis.core.ui.model.GraphicModel;
 import org.weasis.core.ui.model.imp.XmlGraphicModel;
+import org.weasis.core.ui.model.utils.RevisionManager;
 
 public class XmlSerializer {
   private static final Logger LOGGER = LoggerFactory.getLogger(XmlSerializer.class);
@@ -52,6 +54,11 @@ public class XmlSerializer {
     if (model != null && !model.getModels().isEmpty()) {
       File gpxFile = new File(destinationFile.getParent(), destinationFile.getName() + ".xml");
 
+      if (model instanceof AbstractGraphicModel agm) {
+        RevisionManager rm = agm.getRevisionManager();
+        agm.setVersion(rm.createRevision("system", "Presentation saved"));
+      }
+
       try {
         JAXBContext jaxbContext = getJaxbContext(model.getClass());
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -74,6 +81,11 @@ public class XmlSerializer {
 
   public static void writePresentation(GraphicModel model, Writer writer) {
     if (model != null && model.hasSerializableGraphics()) {
+      if (model instanceof AbstractGraphicModel agm) {
+        RevisionManager rm = agm.getRevisionManager();
+        agm.setVersion(rm.createRevision("system", "Presentation saved"));
+      }
+
       try {
         JAXBContext jaxbContext = getJaxbContext(model.getClass());
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -128,6 +140,12 @@ public class XmlSerializer {
       LOGGER.error(
           "Removing {} graphics without a attached layer", model.getModels().size() - length);
     }
+
+    if (model instanceof AbstractGraphicModel agm) {
+      RevisionManager rm = agm.getRevisionManager();
+      rm.setCurrentRevisionNumber(agm.getVersion());
+    }
+
     return model;
   }
 

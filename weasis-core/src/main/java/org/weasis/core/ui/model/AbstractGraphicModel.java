@@ -11,6 +11,7 @@ package org.weasis.core.ui.model;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlElements;
@@ -64,6 +65,7 @@ import org.weasis.core.ui.model.layer.GraphicLayer;
 import org.weasis.core.ui.model.layer.GraphicModelChangeListener;
 import org.weasis.core.ui.model.layer.LayerType;
 import org.weasis.core.ui.model.layer.imp.DefaultLayer;
+import org.weasis.core.ui.model.utils.RevisionManager;
 import org.weasis.core.ui.model.utils.imp.DefaultUUID;
 import org.weasis.core.ui.util.MouseEventDouble;
 
@@ -79,6 +81,11 @@ public abstract class AbstractGraphicModel extends DefaultUUID implements Graphi
   private final List<GraphicModelChangeListener> modelListeners = new ArrayList<>();
   private final List<PropertyChangeListener> graphicsListeners = new ArrayList<>();
   private Boolean changeFiringSuspended = Boolean.FALSE;
+
+  private transient RevisionManager revisionManager;
+
+  @XmlAttribute(name = "version")
+  private int version;
 
   private final Function<Graphic, GraphicLayer> getLayer = Graphic::getLayer;
   private final Function<Graphic, DragGraphic> castToDragGraphic = DragGraphic.class::cast;
@@ -617,6 +624,9 @@ public abstract class AbstractGraphicModel extends DefaultUUID implements Graphi
   public void fireChanged() {
     if (!changeFiringSuspended) {
       modelListeners.stream().forEach(l -> l.handleModelChanged(this));
+      if (revisionManager != null) {
+        this.version = revisionManager.createRevision("system", "Model changed");
+      }
     }
   }
 
@@ -628,6 +638,48 @@ public abstract class AbstractGraphicModel extends DefaultUUID implements Graphi
   @Override
   public void setChangeFiringSuspended(Boolean change) {
     this.changeFiringSuspended = Optional.ofNullable(change).orElse(Boolean.FALSE);
+  }
+
+  /**
+   * Returns the {@link RevisionManager} associated with this model, lazily initializing it on
+   * first access.
+   *
+   * @return the revision manager (never {@code null})
+   */
+  public synchronized RevisionManager getRevisionManager() {
+    if (revisionManager == null) {
+      revisionManager = new RevisionManager();
+    }
+    return revisionManager;
+  }
+
+  /**
+   * Sets the revision manager for this model. Use {@code null} to remove revision tracking.
+   *
+   * @param revisionManager the revision manager, or {@code null}
+   */
+  public synchronized void setRevisionManager(RevisionManager revisionManager) {
+    this.revisionManager = revisionManager;
+  }
+
+  /**
+   * Returns the current version number of this model. Used for XML serialization as the
+   * {@code version} attribute on the presentation root element.
+   *
+   * @return the version number
+   */
+  public int getVersion() {
+    return version;
+  }
+
+  /**
+   * Sets the version number of this model. Called during deserialization to restore the saved
+   * version.
+   *
+   * @param version the version number
+   */
+  public void setVersion(int version) {
+    this.version = version;
   }
 
   @Override
