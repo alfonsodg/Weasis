@@ -546,7 +546,7 @@ public class AcquireManager {
   }
 
   private void readXmlTag(TagW tag, Node node, DefaultTaggable def) {
-    // TODO implement DICOM XML :
+    // DICOM XML import according to PS3.19:
     // http://dicom.nema.org/medical/dicom/current/output/chtml/part19/chapter_A.html
     if (tag instanceof TagSeq && node.hasChildNodes()) {
       NodeList nodeList = node.getChildNodes();
@@ -788,7 +788,7 @@ public class AcquireManager {
    * @return acquireImageInfo based on the image
    */
 
-  // TODO be careful not to execute this method on the EDT
+  // Be careful not to execute this method on the EDT (Event Dispatch Thread)
   private static AcquireMediaInfo getAcquireImageInfo(MediaElement media) {
     if (media == null
         || (media instanceof ImageElement imageElement && imageElement.getImage() == null)) {

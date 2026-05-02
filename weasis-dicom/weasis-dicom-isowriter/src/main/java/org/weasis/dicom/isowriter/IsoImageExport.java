@@ -183,7 +183,7 @@ public class IsoImageExport extends LocalExport {
     }
   }
 
-  // TODO use lib
+  // Uses java.nio.file.Files.walkFileTree to copy folders recursively
   public void copyFolder(Path source, Path target, CopyOption... options) throws IOException {
     Files.walkFileTree(
         source,

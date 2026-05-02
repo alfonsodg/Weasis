@@ -67,7 +67,7 @@ public class SegContour extends Region {
       p = segment.get(i);
       path.lineTo(p.getX(), p.getY());
     }
-    path.closePath(); // TODO check if it is necessary
+    path.closePath();
   }
 
   public double[] getPoints() {

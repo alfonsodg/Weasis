@@ -154,8 +154,8 @@ public abstract class AbstractThumbnailList<E extends MediaElement> extends JLis
     registerDragListeners();
     addMouseListener(new PopupTrigger());
 
-    // TODO prefer the use of Key Bindings rather than keyListener
-    // @see http://docs.oracle.com/javase/tutorial/uiswing/misc/keybinding.html
+    // Prefer Key Bindings over KeyListener for better focus management and accessibility
+    // @see https://docs.oracle.com/javase/tutorial/uiswing/misc/keybinding.html
 
     addKeyListener(
         new KeyAdapter() {
@@ -507,7 +507,7 @@ public abstract class AbstractThumbnailList<E extends MediaElement> extends JLis
   }
 
   public Action buildRefreshAction() {
-    // TODO set this action in toolbar
+    // This action is available but not yet exposed in the toolbar
     return new DefaultAction(
         Messages.getString("JIThumbnailList.refresh_list"),
         event -> {

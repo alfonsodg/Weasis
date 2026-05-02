@@ -244,7 +244,7 @@ public class WaveView extends JPanel implements SeriesViewerListener {
       }
     }
     mediaSeries.setOpen(open);
-    // TODO setSelected and setFocused must be global to all view as open
+    // setSelected and setFocused must be applied globally across all views when a series is open
     mediaSeries.setSelected(false, null);
     mediaSeries.setFocused(false);
   }
@@ -280,7 +280,7 @@ public class WaveView extends JPanel implements SeriesViewerListener {
     DicomMediaIO dicomImageLoader = media.getMediaReader();
     Attributes attributes = dicomImageLoader.getDicomObject();
     if (attributes != null) {
-      // TODO handle several Waveforms: display a combo
+      // Handle several Waveforms: could display a combo selector when multiple waveforms exist
       Attributes dcm = Optional.of(attributes.getNestedDataset(Tag.WaveformSequence)).get();
 
       this.channelNumber =
@@ -291,7 +291,7 @@ public class WaveView extends JPanel implements SeriesViewerListener {
         channels.add(new ChannelDefinition(chDefSeq.get(i), i));
       }
 
-      // TODO show when derived
+      // Show indicator when waveform is derived (originality != ORIGINAL)
       String originality = dcm.getString(Tag.WaveformOriginality);
 
       this.sampleNumber =

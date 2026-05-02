@@ -354,25 +354,6 @@ public class MprView extends View2d implements SliceCanvas, ViewProgress {
       }
     }
 
-    // if (series == null) {
-    // return;
-    // }
-    // final String name = evt.getPropertyName();
-    // if (name.equals(ActionW.SYNCH.cmd())) {
-    // SynchEvent synch = (SynchEvent) evt.getNewValue();
-    // SynchData synchData = (SynchData) actionsInView.get(ActionW.SYNCH_LINK.cmd());
-    // if (synchData != null && Mode.None.equals(synchData.getMode())) {
-    // return;
-    // }
-    // for (Entry<String, Object> entry : synch.getEvents().entrySet()) {
-    // final String command = entry.getKey();
-    // final Object val = entry.getValue();
-    // if (synchData != null && !synchData.isActionEnable(command)) {
-    // continue;
-    // }
-    //
-    // }
-    // }
   }
 
   @Override

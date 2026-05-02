@@ -102,7 +102,7 @@ public final class LookAndFeels {
       UIManager.setLookAndFeel(info.getClassName());
       increaseToolbarSeparatorContrast(dark);
 
-      // TODO set as preference: preserve the default color action
+      // FlatLaf icon colors could be made configurable via preferences
       applyDefaultColor(FlatIconColors.ACTIONS_RED, dark);
       applyDefaultColor(FlatIconColors.ACTIONS_YELLOW, dark);
       applyDefaultColor(FlatIconColors.ACTIONS_GREEN, dark);

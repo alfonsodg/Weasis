@@ -484,10 +484,6 @@ public final class KOManager {
 
             Double location = (Double) view2D.getImage().getTagValue(TagW.SlicePosition);
             if (location != null) {
-              // Double offset = (Double) view2D.getActionValue(ActionW.STACK_OFFSET.cmd());
-              // if (offset != null) {
-              // location += offset;
-              // }
               newImageIndex =
                   dicomSeries.getNearestImageIndex(
                       location,

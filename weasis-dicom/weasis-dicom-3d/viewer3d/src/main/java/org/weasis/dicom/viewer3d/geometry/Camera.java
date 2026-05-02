@@ -198,14 +198,6 @@ public class Camera {
   }
 
   public Vector4d getLightOrigin() {
-    // Vector3d lightPosition = new Vector3d(0, 0, 0);
-    // Matrix4d lightMatrix = new Matrix4d().translate(lightPosition);
-    //
-    // Matrix4d viewInverse = getViewMatrix().invert();
-    // lightMatrix.mul(viewInverse);
-    // Vector3d lightTranslation = new Vector3d();
-    // lightMatrix.getTranslation(lightTranslation);
-    // return new Vector4d(lightTranslation, 1);
     return new Vector4d(0, 0, 0, 1).mul(getViewMatrix().invert());
   }
 

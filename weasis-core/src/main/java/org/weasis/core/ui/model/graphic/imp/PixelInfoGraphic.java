@@ -161,26 +161,7 @@ public class PixelInfoGraphic extends AnnotationGraphic {
     // AbstractLayerModel model = (view2d != null) ? view2d.getLayerModel() : null;
     // if (model != null) {
     // ArrayList<Graphic> selectedGraphics = model.getSelectedGraphics();
-    // boolean isMultiSelection = selectedGraphics.size() > 1;
-    // MeasureTool measureToolListener = null;
-    //
-    // if (selectedGraphics.size() == 1 && selectedGraphics.get(0) == this) {
-    // GraphicsListener[] gfxListeners = model.getGraphicSelectionListeners();
-    // if (gfxListeners != null) {
-    // for (GraphicsListener listener : gfxListeners) {
-    // if (listener instanceof MeasureTool) {
-    // measureToolListener = (MeasureTool) listener;
-    // break;
-    // }
-    // }
-    // }
-    // }
-    //
-    // if (measureToolListener != null && !isMultiSelection) {
-    // Unit displayUnit = (Unit) view2d.getActionValue(ActionW.SPATIAL_UNIT.cmd());
-    // List<MeasureItem> measList = computeMeasurements(layer, true, displayUnit);
-    // measureToolListener.updateMeasuredItems(measList);
-    // }
+
     // }
   }
 

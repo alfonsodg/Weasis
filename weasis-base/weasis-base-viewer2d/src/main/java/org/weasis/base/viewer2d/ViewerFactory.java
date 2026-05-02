@@ -175,7 +175,7 @@ public class ViewerFactory implements SeriesViewerFactory {
             MediaReader<?> reader = codec.getMediaIO(file.toURI(), mimeType, null);
             if (reader != null) {
               if (series == null) {
-                // TODO improve group model for image, uid for group ?
+                // Group model could use a UID-based key instead of the reader instance
                 series = reader.getMediaSeries();
                 MediaElement[] elements = reader.getMediaElement();
                 if (elements != null) {

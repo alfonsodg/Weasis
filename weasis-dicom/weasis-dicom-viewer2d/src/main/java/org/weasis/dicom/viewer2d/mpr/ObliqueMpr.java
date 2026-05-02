@@ -115,23 +115,7 @@ public class ObliqueMpr extends OriginalStack {
       pool.invoke(new CreateSeriesTask(context, uidsRef, AXIAL, SAGITTAL, CORONAL));
     }
 
-    //    ArcBallController arcBall =
-    //        new ArcBallController(controller) {
-    //          @Override
-    //          public void stateChanged(BoundedRangeModel model) {
-    //            Quaterniond rotation = new Quaterniond();
-    //            rotation.rotateZ(Math.toRadians(model.getValue()));
-    //            controller.initRotation(rotation);
-    //          }
-    //        };
-    //    arcBall.enableAction(true);
-    //    controller.setArcBall(arcBall);
-    //    controller.getAxial().getMprView().addMouseListener(arcBall);
-    //    controller.getAxial().getMprView().addMouseMotionListener(arcBall);
-    //    controller.getCoronal().getMprView().addMouseListener(arcBall);
-    //    controller.getCoronal().getMprView().addMouseMotionListener(arcBall);
-    //    controller.getSagittal().getMprView().addMouseListener(arcBall);
-    //    controller.getSagittal().getMprView().addMouseMotionListener(arcBall);
+
   }
 
   private class CreateSeriesTask extends RecursiveAction {

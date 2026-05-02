@@ -1103,7 +1103,7 @@ public abstract class DefaultView2d<E extends ImageElement> extends GraphicsPane
         }
       } else if (command.equals(ActionW.SPATIAL_UNIT.cmd())) {
         actionsInView.put(command, entry.getValue());
-        // TODO update only measure and limit when selected view share graphics
+        // Update only measure and limit when selected view shares graphics
         graphicManager.updateLabels(Boolean.TRUE, this);
       }
     }

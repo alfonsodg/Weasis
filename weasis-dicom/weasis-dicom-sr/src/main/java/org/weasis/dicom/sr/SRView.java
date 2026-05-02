@@ -161,7 +161,7 @@ public class SRView extends JScrollPane implements SeriesViewerListener {
       }
     }
     mediaSeries.setOpen(open);
-    // TODO setSelected and setFocused must be global to all view as open
+    // setSelected and setFocused must be applied globally across all views when a series is open
     mediaSeries.setSelected(false, null);
     mediaSeries.setFocused(false);
   }
@@ -243,7 +243,7 @@ public class SRView extends JScrollPane implements SeriesViewerListener {
               }
             }
           } else {
-            // TODO try to download if IHE IID has been configured
+            // Try to download the referenced SOP instance if IHE IID profile has been configured
             JOptionPane.showMessageDialog(
                 WinUtil.getValidComponent(this),
                 Messages.getString("SRView.msg"),

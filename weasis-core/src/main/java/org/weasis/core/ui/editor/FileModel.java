@@ -27,10 +27,6 @@ import org.weasis.core.api.net.NetworkUtil;
 import org.weasis.core.api.net.URLParameters;
 import org.weasis.core.util.FileUtil;
 
-// TODO required to change the static ref
-// @org.osgi.service.component.annotations.Component(immediate = false, property = {
-//    CommandProcessor.COMMAND_SCOPE + "=image", CommandProcessor.COMMAND_FUNCTION + "=get",
-//    CommandProcessor.COMMAND_FUNCTION + "=close" }, service = FileModel.class)
 public class FileModel extends AbstractFileModel {
   private static final Logger LOGGER = LoggerFactory.getLogger(FileModel.class);
 

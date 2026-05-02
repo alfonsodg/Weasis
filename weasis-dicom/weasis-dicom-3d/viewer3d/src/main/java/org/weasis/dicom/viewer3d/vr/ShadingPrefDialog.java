@@ -151,19 +151,7 @@ public class ShadingPrefDialog extends JDialog {
               options.setSpecularPower(v);
               val = DecFormatter.oneDecimal(v);
             }
-            //            else if (s == ambientSlider) {
-            //              float v = sliderToReal(model.getValue());
-            //              options.setAmbient(v);
-            //              val = DecFormatter.twoDecimal(v);
-            //            } else if (s == diffuseSlider) {
-            //              float v = sliderToReal(model.getValue());
-            //              options.setDiffuse(v);
-            //              val = DecFormatter.twoDecimal(v);
-            //            } else if (s == specularSlider) {
-            //              float v = sliderToReal(model.getValue());
-            //              options.setSpecular(v);
-            //              val = DecFormatter.twoDecimal(v);
-            //            }
+
           }
           String result = title + StringUtil.COLON_AND_SPACE + val;
           SliderChangeListener.updateSliderProperties(s, result);

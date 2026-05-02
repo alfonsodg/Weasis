@@ -548,37 +548,8 @@ public class RtSet {
     return out;
   }
 
-  // TODO: this has to consider all plan doses
-  // public void getDoseValueForPixel(Plan plan, int pixelX, int pixelY, double z) {
-  // if (this.dosePixLUT != null) {
-  // // closest x
-  // double[] xDistance = new double[this.dosePixLUT.getFirst().length];
-  // for (int i = 0; i < xDistance.length; i++) {
-  // xDistance[i] = Math.abs(this.dosePixLUT.getFirst()[i] - pixelX);
-  // }
-  //
-  // double minDistanceX = Arrays.stream(xDistance).min().getAsDouble();
-  // int xDoseIndex = firstIndexOf(xDistance, minDistanceX, 0.001);
-  //
-  // // closest y
-  // double[] yDistance = new double[this.dosePixLUT.getSecond().length];
-  // for (int j = 0; j < yDistance.length; j++) {
-  // yDistance[j] = Math.abs(this.dosePixLUT.getSecond()[j] - pixelY);
-  // }
-  //
-  // double minDistanceY = Arrays.stream(yDistance).min().getAsDouble();
-  // int yDoseIndex = firstIndexOf(yDistance, minDistanceY, 0.001);
-  //
-  // Dose dose = plan.getFirstDose();
-  // if (dose != null) {
-  // MediaElement dosePlane = dose.getDosePlaneBySlice(z);
-  // Double doseGyValue = ((DicomImageElement)dosePlane).getImage().get(xDoseIndex, yDoseIndex)[0] *
-  // dose.getDoseGridScaling();
-  // LOGGER.debug("X: " + pixelX + ", Y: " + pixelY + ", Dose: " + doseGyValue + " Gy / " +
-  // calculateRelativeDose(doseGyValue * 100, this.getFirstPlan().getRxDose()) + " %");
-  // }
-  // }
-  // }
+
+
 
   private Mat calculateContourMask(
       AbstractMap.SimpleImmutableEntry<double[], double[]> doseMmLUT, SegContour contour) {

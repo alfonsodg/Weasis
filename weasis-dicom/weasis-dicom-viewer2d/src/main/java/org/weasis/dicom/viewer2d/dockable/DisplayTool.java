@@ -335,7 +335,7 @@ public class DisplayTool extends PluginTool implements SeriesViewerListener {
 
   @Override
   public void changingViewContentEvent(SeriesViewerEvent event) {
-    // TODO should received layer changes
+    // Should also respond to layer toggle changes (TOGGLE_INFO is already handled)
     EVENT e = event.getEventType();
     if (EVENT.SELECT_VIEW.equals(e) && event.getSeriesViewer() instanceof ImageViewerPlugin) {
       iniTreeValues(((ImageViewerPlugin<?>) event.getSeriesViewer()).getSelectedViewCanvas());

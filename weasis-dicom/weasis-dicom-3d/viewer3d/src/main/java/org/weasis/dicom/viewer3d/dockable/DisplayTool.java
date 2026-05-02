@@ -225,15 +225,6 @@ public class DisplayTool extends PluginTool implements SeriesViewerListener {
   }
 
   private void initLayers(ViewCanvas<?> view) {
-    //    TreeBuilder.setPathSelection(tree,
-    //        getTreePath(drawings),
-    //        LangUtil.getNULLtoTrue((Boolean) view.getActionValue(ActionW.DRAWINGS.cmd())));
-    //
-    //    // FIXME store in pref
-    //    TreeBuilder.setPathSelection(tree,
-    //        getTreePath(orientationCube),
-    //        LangUtil.getNULLtoFalse((Boolean)
-    // view.getActionValue(ActionVol.ORIENTATION_CUBE.cmd())));
   }
 
   private static TreePath getTreePath(TreeNode node) {
@@ -260,7 +251,7 @@ public class DisplayTool extends PluginTool implements SeriesViewerListener {
 
   @Override
   public void changingViewContentEvent(SeriesViewerEvent event) {
-    // TODO should recieved layer changes
+    // Should also respond to layer toggle changes (TOGGLE_INFO is already handled)
     EVENT e = event.getEventType();
     if (EVENT.SELECT_VIEW.equals(e) && event.getSeriesViewer() instanceof ImageViewerPlugin) {
       iniTreeValues(((ImageViewerPlugin<?>) event.getSeriesViewer()).getSelectedViewCanvas());

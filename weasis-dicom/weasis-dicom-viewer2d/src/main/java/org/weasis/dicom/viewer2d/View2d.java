@@ -151,7 +151,7 @@ public class View2d extends DefaultView2d<DicomImageElement> {
     this.infoLayer = new InfoLayer(this);
     this.oldSize = new Dimension(0, 0);
 
-    // TODO should be a lazy instantiation
+    // KO selection button is added eagerly; could be lazy-instantiated on first KO event
     getViewButtons().add(KOComponentFactory.buildKoSelectionButton());
     this.koStarButton = KOComponentFactory.buildKoStarButton(this);
     koStarButton.setPosition(GridBagConstraints.NORTHEAST);
@@ -531,7 +531,7 @@ public class View2d extends DefaultView2d<DicomImageElement> {
 
     Collection<KOSpecialElement> koElements = DicomModel.getKoSpecialElements(getSeries());
     boolean koElementExist = !koElements.isEmpty();
-    // TODO try a given parameter so it wouldn't have to be computed again
+    // Could cache the KO element existence flag to avoid recomputing on every repaint
     boolean needToRepaint = false;
 
     for (ViewButton vb : getViewButtons()) {
@@ -612,15 +612,7 @@ public class View2d extends DefaultView2d<DicomImageElement> {
   public void setSeries(MediaSeries<DicomImageElement> series, DicomImageElement selectedDicom) {
     super.setSeries(series, selectedDicom);
 
-    // TODO
-    // JFrame frame = new JFrame();
-    // frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    // JPanel pane = new JPanel();
 
-    // layeredPane.setPreferredSize(new Dimension(200, 200));
-    // pane.remove(layeredPane);
-    // layeredPane.removeAll();
-    // panner.setSize(200, 200);
     // layeredPane.add(panner, JLayeredPane.DEFAULT_LAYER);
     // pane.add(layeredPane);
     // panner.setBounds(0, 0, 200, 200);
@@ -1157,7 +1149,7 @@ public class View2d extends DefaultView2d<DicomImageElement> {
         popupMenu.add(new JSeparator());
       }
 
-      // TODO separate AbstractDragGraphic and ClassGraphic for properties
+      // Separate AbstractDragGraphic and ClassGraphic for properties panel
       final ArrayList<DragGraphic> list = new ArrayList<>();
       for (Graphic graphic : selected) {
         if (graphic instanceof DragGraphic dragGraphic) {

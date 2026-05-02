@@ -438,7 +438,8 @@ public class EventManager extends ImageViewerEventManager<DicomImageElement>
 
           // FIX : setting actionInView here without firing a propertyChange avoid another call to
           // imageLayer.updateImageOperation(WindowOp.name.....
-          // TODO pass to mediaEvent with PR and KO
+          // Pass window/level changes as mediaEvent so Presentation State and Key Object
+          // listeners can react accordingly
 
           Optional<ImageOpNode> node = view2d.getDisplayOpManager().getNode(WindowOp.OP_NAME);
           if (node.isPresent()) {
@@ -1356,7 +1357,7 @@ public class EventManager extends ImageViewerEventManager<DicomImageElement>
             // pane.updateSynchState();
           }
         } else {
-          // TODO if Pan is activated than rotation is required
+          // If Pan is activated then rotation is required
           if (Mode.STACK.equals(synch.getMode())) {
             String fruid = TagD.getTagValue(series, Tag.FrameOfReferenceUID, String.class);
             DicomImageElement img = series.getMedia(MEDIA_POSITION.MIDDLE, null, null);

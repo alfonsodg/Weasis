@@ -537,8 +537,8 @@ public class WeasisWin {
   }
 
   private void setExternalPosition(final DefaultSingleCDockable dockable) {
-    // TODO should be set dynamically. Maximize button of external window does not support
-    // multi-screens.
+    // External window position should be set dynamically for multi-screen support.
+    // Maximize button does not span multiple screens.
     ExternalDisplay otherScreen =
         ExternalDisplay.onOtherScreen(rootPaneContainer.getRootPane().getBounds());
     if (otherScreen != null) {

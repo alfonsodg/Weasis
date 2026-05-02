@@ -94,8 +94,7 @@ public class ModalityView {
             Messages.getString("ModalityView.laterality"),
             TagD.getTagFromIDs(Tag.FrameLaterality, Tag.ImageLaterality, Tag.Laterality));
 
-    // TODO add sequence
-    // derived from Contrast/Bolus Agent Sequence (0018,0012), if
+    // Optionally derive from Contrast/Bolus Agent Sequence (0018,0012) instead, if
     // present, else Contrast/Bolus Agent (0018,0010)
     // http://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.7.6.4b.html
     disElements[3] =

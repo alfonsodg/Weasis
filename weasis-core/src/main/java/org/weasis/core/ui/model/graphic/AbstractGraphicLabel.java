@@ -221,26 +221,6 @@ public abstract class AbstractGraphicLabel implements GraphicLabel {
         }
       }
 
-      // Graphics DEBUG
-      // Point2D pt2 = new Point2D.Double(labelBounds.getX(), labelBounds.getY());
-      // if (transform != null) {
-      // transform.transform(pt2, pt2);
-      // }
-      //
-      // g2d.setPaint(Color.RED);
-      // g2d.draw(new Line2D.Double(pt2.getX() - 5, pt2.getY(), pt2.getX() + 5, pt2.getY()));
-      // g2d.draw(new Line2D.Double(pt2.getX(), pt2.getY() - 5, pt2.getX(), pt2.getY() + 5));
-      //
-      // if (transform != null) {
-      // g2d.setPaint(Color.GREEN);
-      // g2d.draw(transform.createTransformedShape(getBounds(transform)));
-      // }
-      // if (transform != null) {
-      // g2d.setPaint(Color.RED);
-      // g2d.draw(transform.createTransformedShape(getArea(transform)));
-      // }
-      // Graphics DEBUG
-
       if (selected) {
         paintBoundOutline(g2d, transform);
       }

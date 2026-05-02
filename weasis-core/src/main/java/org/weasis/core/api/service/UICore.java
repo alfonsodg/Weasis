@@ -582,7 +582,7 @@ public final class UICore {
       return;
     }
     mediaSeries.setOpen(isSeriesOpenInViewer(mediaSeries));
-    // TODO setSelected and setFocused must be global to all view as open
+    // setSelected and setFocused must be applied globally across all views when a series is open
     mediaSeries.setSelected(false, null);
     mediaSeries.setFocused(false);
   }

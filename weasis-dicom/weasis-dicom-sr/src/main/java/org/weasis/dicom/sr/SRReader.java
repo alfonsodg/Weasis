@@ -272,12 +272,6 @@ public class SRReader {
           }
         }
 
-        // } else if ("TCOORD".equals(type)) {
-        // html.append(continuous || noCodeName ? " " : StringUtil.COLON_AND_SPACE);
-        // // TODO
-        // } else if ("WAVEFORM".equals(type)) {
-        // html.append(continuous || noCodeName ? " " : StringUtil.COLON_AND_SPACE);
-        // // TODO
       } else if (type != null) {
         html.append("<i>");
         html.append(type);

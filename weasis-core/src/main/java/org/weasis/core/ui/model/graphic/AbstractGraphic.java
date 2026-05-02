@@ -445,21 +445,6 @@ public abstract class AbstractGraphic extends DefaultUUID implements Graphic {
       }
     }
 
-    // // Graphics DEBUG
-    // if (transform != null) {
-    // g2d.setPaint(Color.CYAN);
-    // g2d.draw(transform.createTransformedShape(getBounds(transform)));
-    // }
-    // if (transform != null) {
-    // g2d.setPaint(Color.RED);
-    // g2d.draw(transform.createTransformedShape(getArea(transform)));
-    // }
-    // if (transform != null) {
-    // g2d.setPaint(Color.BLUE);
-    // g2d.draw(transform.createTransformedShape(getRepaintBounds(transform)));
-    // }
-    // // Graphics DEBUG
-
     g2d.setStroke(oldStroke);
     g2d.setPaint(oldPaint);
 

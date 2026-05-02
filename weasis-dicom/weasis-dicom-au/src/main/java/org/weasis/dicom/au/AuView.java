@@ -140,7 +140,7 @@ public class AuView extends JPanel implements SeriesViewerListener {
       }
     }
     mediaSeries.setOpen(open);
-    // TODO setSelected and setFocused must be global to all view as open
+    // setSelected and setFocused must be applied globally across all views when a series is open
     mediaSeries.setSelected(false, null);
     mediaSeries.setFocused(false);
   }

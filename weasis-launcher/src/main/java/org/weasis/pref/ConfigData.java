@@ -655,9 +655,9 @@ public class ConfigData {
 
         if (urlConnection instanceof HttpURLConnection httpURLConnection) {
           if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            // HTTP redirection is not handled; use applyRedirectionStream() for 3xx responses
+            // @see org.weasis.core.api.util.NetworkUtil.applyRedirectionStream()
             throw new IOException(httpURLConnection.getResponseMessage());
-            // TODO ## redirection stream is not handled
-            // @see weasis.core.api.util.NetworkUtil.applyRedirectionStream()
           }
         }
         stream = urlConnection.getInputStream();

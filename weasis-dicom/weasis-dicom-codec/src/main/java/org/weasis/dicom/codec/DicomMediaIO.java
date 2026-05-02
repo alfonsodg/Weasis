@@ -185,7 +185,7 @@ public class DicomMediaIO implements DcmMediaReader {
       readTagsInModalityView(entry.getValue().getCornerInfo(CornerDisplay.BOTTOM_RIGHT).getInfos());
     }
 
-    // TODO init with a profile
+    // Initialize anonymization profile; could be selected from preferences
     DicomMediaUtils.enableAnonymizationProfile(true);
   }
 

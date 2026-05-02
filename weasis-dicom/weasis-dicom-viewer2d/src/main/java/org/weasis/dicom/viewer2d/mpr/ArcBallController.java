@@ -104,13 +104,6 @@ public abstract class ArcBallController extends SliderChangeListener implements 
     }
   }
 
-  //  public Vector3d getPosition(Point2D p) {
-  //    return new Vector3d(
-  //        row.x * voxelSpacing.x * p.getX() + column.x * voxelSpacing.y * p.getY() + tlhc.x,
-  //        row.y * voxelSpacing.x * p.getX() + column.y * voxelSpacing.y * p.getY() + tlhc.y,
-  //        row.z * voxelSpacing.x * p.getX() + column.z * voxelSpacing.y * p.getY() + tlhc.z);
-  //  }
-
   @Override
   public void mouseMoved(MouseEvent e) {
     move(e);

@@ -756,10 +756,7 @@ public class MprController
         this.selectedPoint = c.p1Rotate;
       } else if (selectedPoint == controlPoints.p2Rotate) {
         this.selectedPoint = c.p2Rotate;
-        //      } else if(selectedPoint == controlPoints.p1Extend) {
-        //        this.selectedPoint = c.p1Extend;
-        //      } else if(selectedPoint == controlPoints.p2Extend) {
-        //        this.selectedPoint = c.p2Extend;;
+
       }
     }
 

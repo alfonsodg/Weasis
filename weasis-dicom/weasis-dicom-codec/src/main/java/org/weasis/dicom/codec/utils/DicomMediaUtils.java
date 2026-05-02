@@ -670,7 +670,7 @@ public class DicomMediaUtils {
      *     Tag.CodeMeaning = "Of Interest"
      */
     final Attributes documentTitle = codeByValue.get("113000").toCodeItem();
-    // TODO - the user or some preferences should be able to set this title value from a predefined
+    // The user or some preferences should be able to set this title value from a predefined
     // list of code
 
     /**
@@ -682,17 +682,14 @@ public class DicomMediaUtils {
      * @see PS 3.16 - Structured Reporting Templates § TID 2010 Key Object Selection
      */
 
-    // TODO - add ability to set "Optional Document Title Modifier" for created KOS from the
+    // Add ability to set "Optional Document Title Modifier" for created KOS from the
     // predefined list of code
-    // final Attributes documentTitleModifier = null;
 
     final String seriesNumber = "999"; // A number that identifies the Series. (default: 999)
     final String instanceNumber = "1"; // A number that identifies the Document. (default: 1)
 
-    // TODO - add ability to override default instanceNumber and seriesNumber from given parameters
-    // in case many
-    // KEY OBJECT DOCUMENT SERIES and KEY OBJECT DOCUMENT are build for the same Study in the same
-    // context
+    // Add ability to override default instanceNumber and seriesNumber from given parameters
+    // in case many Key Object Document Series and Documents are built for the same Study
 
     final int[] patientStudyAttributes = {
       Tag.SpecificCharacterSet,
@@ -741,20 +738,6 @@ public class DicomMediaUtils {
 
     Sequence contentSeq = dKOS.newSequence(Tag.ContentSequence, 1);
 
-    // !! Dead Code !! uncomment this when documentTitleModifier will be handled (see above)
-    // if (documentTitleModifier != null) {
-    //
-    // Attributes documentTitleModifierSequence = new Attributes(4);
-    // documentTitleModifierSequence.setString(Tag.RelationshipType, VR.CS, "HAS CONCEPT MOD");
-    // documentTitleModifierSequence.setString(Tag.ValueType, VR.CS, "CODE");
-    // documentTitleModifierSequence.newSequence(Tag.ConceptNameCodeSequence, 1).add(
-    // makeKOS.toCodeItem("DCM-113011"));
-    // documentTitleModifierSequence.newSequence(Tag.ConceptCodeSequence,
-    // 1).add(documentTitleModifier);
-    //
-    // contentSeq.add(documentTitleModifierSequence);
-    // }
-
     if (StringUtil.hasText(keyObjectDescription)) {
 
       Attributes keyObjectDescriptionSequence = new Attributes(4);
@@ -769,7 +752,7 @@ public class DicomMediaUtils {
       dKOS.setString(Tag.SeriesDescription, VR.LO, keyObjectDescription);
     }
 
-    // TODO - Handle Identical Documents Sequence (see below)
+    // Handle Identical Documents Sequence (see below)
     /**
      * @see DICOM standard PS 3.3 - § C.17.6 Key Object Selection Modules && § C.17.6.2.1 Identical
      *     Documents

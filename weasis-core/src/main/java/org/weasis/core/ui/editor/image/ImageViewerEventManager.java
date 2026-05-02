@@ -669,7 +669,7 @@ public abstract class ImageViewerEventManager<E extends ImageElement> implements
             pane.setActionsInView(ActionW.SYNCH_LINK.cmd(), synch);
           }
         } else if (Mode.STACK.equals(synch.getMode())) {
-          // TODO if Pan is activated than rotation is required
+          // If Pan is activated then rotation is required
           boolean hasLink = false;
           for (ViewCanvas<E> pane : panes) {
             boolean synchByDefault = isCompatible(viewPane.getSeries(), pane.getSeries());

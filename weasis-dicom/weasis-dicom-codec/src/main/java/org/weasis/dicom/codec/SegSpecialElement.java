@@ -206,7 +206,8 @@ public class SegSpecialElement extends HiddenSpecialElement
     Attributes dicom = ((DicomMediaIO) mediaIO).getDicomObject();
     String segmentType = dicom.getString(Tag.SegmentationType);
     if ("FRACTIONAL".equals(segmentType)) {
-      // TODO: handle fractional segmentations
+      // Fractional segmentations contain probability values per voxel rather than binary masks.
+      // Current implementation only handles binary segmentations (value 1). See DICOM PS 3.3 C.8.20.2.
     }
 
     // Locate the name and number of each ROI

@@ -469,51 +469,6 @@ public abstract class AbstractGraphicModel extends DefaultUUID implements Graphi
     return Optional.ofNullable(firstSelectedGraph);
   }
 
-  // @Override
-  // public List<Graphic> getGraphicsBoundsInArea(Rectangle rect) {
-  // List<Graphic> arraylist = new ArrayList<>();
-  // if (graphics != null && rect != null) {
-  // for (int j = graphics.list.size() - 1; j >= 0; j--) {
-  // Graphic graphic = graphics.list.get(j);
-  // Rectangle2D graphicBounds = graphic.getRepaintBounds(getAffineTransform());
-  // if (graphicBounds != null && graphicBounds.intersects(rect)) {
-  // arraylist.add(graphic);
-  // }
-  // }
-  // }
-  // return arraylist;
-  // }
-
-  // @Override
-  // public AbstractDragGraphic getGraphicContainPoint(MouseEventDouble mouseEvt) {
-  // final Point2D mousePt = mouseEvt.getImageCoordinates();
-  //
-  // if (graphics != null && mousePt != null) {
-  //
-  // for (int j = graphics.list.size() - 1; j >= 0; j--) {
-  // if (graphics.list.get(j) instanceof AbstractDragGraphic) {
-  //
-  // AbstractDragGraphic dragGraph = (AbstractDragGraphic) graphics.list.get(j);
-  //
-  // if (dragGraph.isOnGraphicLabel(mouseEvt)) {
-  // return dragGraph;
-  // }
-  //
-  // // Improve speed by checking if mousePoint is inside repaintBound before checking if inside
-  // Area
-  // Rectangle2D repaintBound = dragGraph.getRepaintBounds(mouseEvt);
-  // if (repaintBound != null && repaintBound.contains(mousePt)) {
-  // if ((dragGraph.getHandlePointIndex(mouseEvt) >= 0)
-  // || (dragGraph.getArea(mouseEvt).contains(mousePt))) {
-  // return dragGraph;
-  // }
-  // }
-  // }
-  // }
-  // }
-  // return null;
-  // }
-
   @Override
   public List<DragGraphic> getSelectedDraggableGraphics() {
     return models.stream()

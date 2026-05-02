@@ -126,18 +126,6 @@ public class ZoomToolBar extends WtoolBar {
         });
     list.add(bestFitMenu);
 
-    // final JMenuItem areaZoomMenu =
-    // new JMenuItem("Area selection", new ImageIcon(
-    // MResourceUtil.getIcon(ActionIcon.ZOOM_AREA));
-    // areaZoomMenu.addActionListener(new ActionListener() {
-    //
-    // @Override
-    // public void actionPerformed(ActionEvent e) {
-    //
-    // }
-    // });
-    // list.add(areaZoomMenu);
-
     return list;
   }
 }

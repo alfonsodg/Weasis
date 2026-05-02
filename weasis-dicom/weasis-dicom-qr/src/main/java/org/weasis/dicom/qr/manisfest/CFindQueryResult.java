@@ -11,6 +11,8 @@ package org.weasis.dicom.qr.manisfest;
 
 import java.util.List;
 import org.dcm4che3.data.Attributes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.dcm4che3.data.Tag;
 import org.dcm4che3.img.util.DicomUtils;
 import org.dcm4che3.net.service.QueryRetrieveLevel;
@@ -32,6 +34,7 @@ import org.weasis.dicom.param.DicomState;
 
 public class CFindQueryResult extends AbstractQueryResult {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(CFindQueryResult.class);
   protected final WadoParameters wadoParameters;
 
   public CFindQueryResult(WadoParameters wadoParameters) {
@@ -65,7 +68,9 @@ public class CFindQueryResult extends AbstractQueryResult {
           CFind.process(
               advancedParams, callingNode, calledNode, 0, QueryRetrieveLevel.SERIES, keysSeries);
 
-      // TODO add error message
+      if (state.hasFailed()) {
+        LOGGER.warn("C-FIND SERIES failed: {}", state.getErrorMessage());
+      }
       List<Attributes> seriesRSP = state.getDicomRSP();
       if (seriesRSP != null && !seriesRSP.isEmpty()) {
         MediaSeriesGroup studyGroup = model.getStudyNode(studyUID);

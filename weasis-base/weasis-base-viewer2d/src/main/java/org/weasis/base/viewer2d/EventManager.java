@@ -616,20 +616,6 @@ public class EventManager extends ImageViewerEventManager<ImageElement> implemen
     return menu;
   }
 
-  // public JMenu getSortStackMenu(String prop) {
-  // JMenu menu = null;
-  // if (GuiUtils.getUICore().getSystemPreferences().getBooleanProperty(prop, true)) {
-  // menu =
-  // sortStackAction.createUnregisteredRadioMenu(Messages.getString("View2dContainer.sort_stack"));
-  //
-  //
-  // menu.add(new JSeparator());
-  // menu.add(inverseStackAction.createUnregisteredJCCheckBoxMenuItem(Messages
-  // .getString("View2dContainer.inv_stack")));
-  // }
-  // return menu;
-  // }
-
   public JMenu getLutMenu(String prop) {
     if (GuiUtils.getUICore().getSystemPreferences().getBooleanProperty(prop, true)) {
       Optional<ComboItemListener<ByteLut>> lutAction = getAction(ActionW.LUT);

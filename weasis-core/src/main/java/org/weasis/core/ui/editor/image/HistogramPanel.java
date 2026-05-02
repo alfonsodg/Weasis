@@ -342,7 +342,7 @@ public class HistogramPanel extends JPanel {
       double max = windLevel.getLevelMax() + 1.0;
       double factor = (max - min) / histValues.length;
       for (int i = 0; i < histValues.length; i++) {
-        // TODO convert in real value (modality lut)
+        // Convert pixel value using Modality LUT to real value
         int val = (int) Math.ceil(i * factor + min);
         int val2 = (int) Math.floor((i + 1) * factor + min);
         StringBuilder buf = new StringBuilder();

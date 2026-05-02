@@ -59,7 +59,7 @@ public class MediaImporterFactory implements DataExplorerViewFactory {
     if (explorer != null) {
       explorer.saveLastPath();
       AcquireManager.getInstance().unRegisterDataExplorerView();
-      // TODO handle user message if all data is not published !!!
+      // Should show user message if not all data was published successfully
       PropertiesUtil.storeProperties(
           BundlePreferences.getFileInDataFolder(context.getBundleContext(), "publish.properties"),
           EXPORT_PERSISTENCE,

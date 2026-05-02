@@ -282,68 +282,6 @@ public class RenderedImageLayer<E extends ImageElement> extends DefaultUUID
     // Integer rotationAngle = (Integer) canvas.getActionValue(ActionW.ROTATION.cmd());
     //
     // double curScale = canvas.getViewModel().getViewScale();
-    // // Do not print lower than 72 dpi (drawRenderedImage can only decrease the size for printer
-    // not interpolate)
-    // double imageRes = viewScale < curScale ? curScale : viewScale;
-    //
-    // AffineTransform affineTransform = AffineTransform.getScaleInstance(flip ? -imageRes :
-    // imageRes, imageRes);
-    // if (rotationAngle != null && rotationAngle > 0) {
-    // affineTransform.rotate(Math.toRadians(rotationAngle), rWidth / 2.0, rHeight / 2.0);
-    // }
-    // if (flip) {
-    // affineTransform.translate(-rWidth, 0.0);
-    // }
-    //
-    // ImageOpNode node = dispOp.getNode(AffineTransformOp.OP_NAME);
-    // if (node != null) {
-    // double diffRatio = curScale / imageRes;
-    // Rectangle2D imgBounds = affineTransform.createTransformedShape(modelArea).getBounds2D();
-    //
-    // double diffx = 0.0;
-    // double diffy = 0.0;
-    // Rectangle2D viewBounds = new Rectangle2D.Double(0, 0, canvas.getJComponent().getWidth(),
-    // canvas.getJComponent().getHeight());
-    // Rectangle2D srcBounds = canvas.getImageViewBounds(viewBounds.getWidth(),
-    // viewBounds.getHeight());
-    //
-    // Rectangle2D dstBounds;
-    // if (viewBounds.contains(srcBounds)) {
-    // dstBounds = srcBounds;
-    // } else {
-    // dstBounds = viewBounds.createIntersection(srcBounds);
-    //
-    // if (srcBounds.getX() < 0.0) {
-    // diffx += srcBounds.getX();
-    // }
-    // if (srcBounds.getY() < 0.0) {
-    // diffy += srcBounds.getY();
-    // }
-    // }
-    //
-    // double[] fmx = new double[6];
-    // affineTransform.getMatrix(fmx);
-    // // adjust transformation matrix => move the center to keep all the image
-    // fmx[4] -= imgBounds.getX() - diffx;
-    // fmx[5] -= imgBounds.getY() - diffy;
-    // affineTransform.setTransform(fmx[0], fmx[1], fmx[2], fmx[3], fmx[4], fmx[5]);
-    //
-    // // Convert to openCV affine matrix
-    // double[] m = new double[] { fmx[0], fmx[2], fmx[4], fmx[1], fmx[3], fmx[5] };
-    // Object oldMatrix = node.getParam(AffineTransformOp.P_AFFINE_MATRIX);
-    // Object oldBounds = node.getParam(AffineTransformOp.P_DST_BOUNDS);
-    // node.setParam(AffineTransformOp.P_AFFINE_MATRIX, m);
-    // node.setParam(AffineTransformOp.P_DST_BOUNDS, dstBounds);
-    // PlanarImage img = disOpManager.process();
-    // node.setParam(AffineTransformOp.P_AFFINE_MATRIX, oldMatrix);
-    // node.setParam(AffineTransformOp.P_DST_BOUNDS, oldBounds);
-    //
-    //
-    // g2d.drawRenderedImage(ImageProcessor.toBufferedImage(img),
-    // AffineTransform.getScaleInstance(diffRatio,
-    // diffRatio));
-    // }
-
     List<Double> matrix =
         (List<Double>)
             disOpManager
