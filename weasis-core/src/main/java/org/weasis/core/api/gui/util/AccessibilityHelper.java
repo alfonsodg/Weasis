@@ -9,6 +9,20 @@
  */
 package org.weasis.core.api.gui.util;
 
+/**
+ * Utility class for setting up Java Accessibility API on Swing components.
+ *
+ * <p>Provides static methods to set accessible names, descriptions, and mnemonics on common Swing
+ * component types. Also configures the global focus traversal policy and enables Java Access Bridge
+ * for screen reader support (JAWS, NVDA, VoiceOver).
+ *
+ * <p>Usage:
+ *
+ * <pre>{@code
+ * AccessibilityHelper.setAccessibleName(button, "Open file", "Opens a DICOM file");
+ * AccessibilityHelper.initGlobalFocusPolicy();
+ * }</pre>
+ */
 import java.awt.KeyboardFocusManager;
 import java.util.Objects;
 import javax.swing.AbstractButton;

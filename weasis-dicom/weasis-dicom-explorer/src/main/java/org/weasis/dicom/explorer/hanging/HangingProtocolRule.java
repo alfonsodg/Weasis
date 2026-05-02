@@ -9,6 +9,23 @@
  */
 package org.weasis.dicom.explorer.hanging;
 
+/**
+ * Represents a single hanging protocol rule that determines the image layout to apply when opening
+ * a study.
+ *
+ * <p>A rule matches based on the study's modality, body part, and series count. The first matching
+ * rule (by priority order) determines the layout applied to the viewer.
+ *
+ * <p>Rules can be configured via XML. Default rules are provided for common modalities:
+ *
+ * <ul>
+ *   <li>CT Abdomen with multiple series → 2x2 or 2x4 grid
+ *   <li>MR Brain → 2x3 grid
+ *   <li>CR/DX/US/PET → 1x2 comparison
+ *   <li>NM → 1x3 grid
+ *   <li>MG → 2_f1x2 with full-resolution and comparison
+ * </ul>
+ */
 import java.util.Objects;
 import org.w3c.dom.Element;
 import org.weasis.core.util.StringUtil;

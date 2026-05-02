@@ -9,6 +9,16 @@
  */
 package org.weasis.dicom.explorer.hanging;
 
+/**
+ * Engine that evaluates hanging protocol rules to determine the best image layout for a study.
+ *
+ * <p>Maintains an ordered list of {@link HangingProtocolRule} rules. When a study is opened, the
+ * first matching rule (by priority) determines the layout. If no rule matches, a default layout
+ * (1x1) is applied.
+ *
+ * <p>Rules can be loaded from an XML configuration file or set programmatically. The engine uses an
+ * LRU cache to avoid re-evaluating previously seen study configurations.
+ */
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;

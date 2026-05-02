@@ -9,6 +9,19 @@
  */
 package org.weasis.core.ui.accessible;
 
+/**
+ * A focus traversal policy that follows a logical left-to-right, top-to-bottom order based on
+ * component position within the container.
+ *
+ * <p>This policy enables keyboard-only navigation (Tab/Shift-Tab) in a clinically meaningful order
+ * across the Weasis interface. Components are ordered by their rectangular bounds, prioritizing
+ * vertical position (top row first) then horizontal position (left to right).
+ *
+ * <p>Replaces the default Swing FocusTraversalPolicy which may not follow the clinical workflow
+ * order expected by radiologists and technicians.
+ *
+ * @see javax.swing.FocusTraversalPolicy
+ */
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
