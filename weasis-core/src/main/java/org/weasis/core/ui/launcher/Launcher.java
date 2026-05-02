@@ -432,7 +432,7 @@ public class Launcher {
 
       Thread launcherThread =
           Thread.ofVirtual()
-              .start(
+              .unstarted(
                   () -> {
                     try {
                       Process p = processBuilder.start();
@@ -442,7 +442,7 @@ public class Launcher {
                       String data;
                       int lineCount = 0;
                       while (lineCount < 5 && (data = buffer.readLine()) != null) {
-                        System.out.println(data);
+                        LOGGER.info("Process output: {}", data);
                         lineCount++;
                       }
 

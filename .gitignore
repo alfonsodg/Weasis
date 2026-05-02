@@ -34,6 +34,9 @@ Thumbs.db
 # crash file
 hs_err*.log
 
+# IDE annotations (specific to developer IDE configuration)
+annotations/
+
 # bndTools
 /generated/
 /index.xml*

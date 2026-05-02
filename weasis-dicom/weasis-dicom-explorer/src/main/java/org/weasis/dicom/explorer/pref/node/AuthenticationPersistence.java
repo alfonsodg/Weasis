@@ -14,9 +14,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import javax.swing.JComboBox;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
@@ -58,29 +60,37 @@ public class AuthenticationPersistence {
   private static final String T_OPENID = "openid"; // NON-NLS
   private static final String T_AUDIENCE = "audience"; // NON-NLS
 
-  private static final Map<String, AuthMethod> methods = new HashMap<>();
+  private static final Map<String, AuthMethod> methods = new ConcurrentHashMap<>();
+  private static volatile boolean loaded = false;
+  private static final Object loadLock = new Object();
 
   private AuthenticationPersistence() {}
 
   public static AuthMethod getAuthMethod(String serviceId) {
-    if (methods.isEmpty()) {
-      loadMethods();
-    }
+    ensureLoaded();
     return methods.getOrDefault(serviceId, OAuth2ServiceFactory.NO_AUTH);
   }
 
   public static Map<String, AuthMethod> getMethods() {
-    if (methods.isEmpty()) {
-      loadMethods();
+    ensureLoaded();
+    return Collections.unmodifiableMap(new HashMap<>(methods));
+  }
+
+  private static void ensureLoaded() {
+    if (!loaded) {
+      synchronized (loadLock) {
+        if (!loaded) {
+          loadMethods();
+        }
+      }
     }
-    return methods;
   }
 
   public static Collection<AuthMethod> loadMethods() {
-    if (methods.isEmpty()) {
-      // FIXME, for testing purpose
-      // HttpsURLConnection.setDefaultHostnameVerifier((urlHostName, session) -> true);
-
+    synchronized (loadLock) {
+      if (!methods.isEmpty()) {
+        return methods.values();
+      }
       List<AuthMethod> list = new ArrayList<>();
       // Load nodes from resources
       loadMethods(list, ResourceUtil.getResource(FILENAME), false);
@@ -91,16 +101,27 @@ public class AuthenticationPersistence {
       for (AuthMethod m : list) {
         methods.put(m.getUid(), m);
       }
+      loaded = true;
       return list;
     }
-    return methods.values();
   }
 
   public static void loadMethods(JComboBox<AuthMethod> comboBox) {
     comboBox.addItem(OAuth2ServiceFactory.NO_AUTH);
-    Collection<AuthMethod> list = loadMethods();
-    for (AuthMethod node : list) {
+    for (AuthMethod node : methods.values()) {
       comboBox.addItem(node);
+    }
+    // Load in background if not yet loaded
+    if (!loaded) {
+      new Thread(
+              () -> {
+                Collection<AuthMethod> list = loadMethods();
+                for (AuthMethod node : list) {
+                  comboBox.addItem(node);
+                }
+              },
+              "AuthMethodLoader")
+          .start();
     }
   }
 

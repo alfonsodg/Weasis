@@ -374,6 +374,6 @@ public class SegmentationTool extends PluginTool implements SeriesViewerListener
 
   @Override
   protected void changeToolWindowAnchor(CLocation clocation) {
-    // TODO Auto-generated method stub
+    // Segmentation tool does not depend on window orientation
   }
 }

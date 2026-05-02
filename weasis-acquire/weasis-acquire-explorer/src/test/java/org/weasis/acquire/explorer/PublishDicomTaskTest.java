@@ -18,12 +18,15 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.weasis.acquire.explorer.gui.dialog.AcquirePublishDialog.Resolution;
 import org.weasis.core.api.media.data.ImageElement;
 import org.weasis.core.api.media.data.TagW;
 
 @ExtendWith(MockitoExtension.class)
 class PublishDicomTaskTest {
+  private static final Logger LOGGER = LoggerFactory.getLogger(PublishDicomTaskTest.class);
   @Mock AcquireImageInfo imgInfo;
   @Mock ImageElement imgElt;
 
@@ -32,7 +35,7 @@ class PublishDicomTaskTest {
     try (AutoCloseable closeable = MockitoAnnotations.openMocks(this)) {
       // Initialize mocks before each test
     } catch (Exception e) {
-      e.printStackTrace();
+      LOGGER.error("Error initializing mocks", e);
     }
   }
 

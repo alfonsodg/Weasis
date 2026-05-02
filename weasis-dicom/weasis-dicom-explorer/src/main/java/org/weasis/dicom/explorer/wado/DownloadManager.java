@@ -334,22 +334,29 @@ public class DownloadManager {
         tempFile = Files.createTempFile(AppProperties.APP_TEMP_DIR, "wado_", ".xml"); // NON-NLS
         FileUtil.writeStreamWithIOException(stream, tempFile);
       }
-      xmler = factory.createXMLStreamReader(new FileInputStream(tempFile.toFile()));
-
-      Source xmlFile = new StAXSource(xmler);
-      SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-      try {
-        Schema schema =
-            schemaFactory.newSchema(DownloadManager.class.getResource("/config/manifest.xsd"));
-        Validator validator = schema.newValidator();
-        validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, StringUtil.EMPTY_STRING);
-        validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, StringUtil.EMPTY_STRING);
-        validator.validate(xmlFile);
-        LOGGER.info("[Validate with XSD schema] the manifest is valid");
-      } catch (SAXException e) {
-        LOGGER.error("[Validate with XSD schema] the manifest is NOT valid", e);
+      // First reader: used only for XSD schema validation, close immediately after use
+      try (InputStream valStream = new FileInputStream(tempFile.toFile());
+          XMLStreamReader validationReader =
+              factory.createXMLStreamReader(valStream)) {
+        Source xmlFile = new StAXSource(validationReader);
+        SchemaFactory schemaFactory =
+            SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        try {
+          Schema schema =
+              schemaFactory.newSchema(
+                  DownloadManager.class.getResource("/config/manifest.xsd"));
+          Validator validator = schema.newValidator();
+          validator.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, StringUtil.EMPTY_STRING);
+          validator.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, StringUtil.EMPTY_STRING);
+          validator.validate(xmlFile);
+          LOGGER.info("[Validate with XSD schema] the manifest is valid");
+        } catch (SAXException e) {
+          LOGGER.error("[Validate with XSD schema] the manifest is NOT valid", e);
+        } catch (Exception e) {
+          LOGGER.error("Error when validate XSD schema.", e);
+        }
       } catch (Exception e) {
-        LOGGER.error("Error when validate XSD schema.", e);
+        LOGGER.error("Error when setting up XSD validation", e);
       }
 
       ReaderParams params = new ReaderParams(model, seriesMap);

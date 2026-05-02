@@ -7,10 +7,14 @@ import java.awt.Component;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.JButton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.weasis.core.api.gui.util.GuiUtils;
 import org.weasis.core.ui.util.WtoolBar;
 
 public class SampleToolBar extends WtoolBar {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleToolBar.class);
 
     protected SampleToolBar() {
         super("Sample Toolbar", 400);
@@ -21,12 +25,11 @@ public class SampleToolBar extends WtoolBar {
         helpButton.addActionListener(
             e -> {
                 if (e.getSource() instanceof Component component) {
-                    URL url;
                     try {
-                        url = new URL("https://nroduit.github.io/en/tutorials/");
+                        URL url = new URL("https://nroduit.github.io/en/tutorials/");
                         GuiUtils.openInDefaultBrowser(component, url);
                     } catch (MalformedURLException e1) {
-                        e1.printStackTrace();
+                        LOGGER.error("Cannot open URL", e1);
                     }
                 }
             });
