@@ -36,8 +36,8 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - name: Build with Maven
-        run: mvn -B -ntp verify
+      - name: Build with Maven (format check + coverage)
+        run: mvn -B -ntp spotless:check verify -Pcoverage
 
       - name: Upload coverage report (Linux only)
         if: matrix.os == 'ubuntu-latest' && always()
