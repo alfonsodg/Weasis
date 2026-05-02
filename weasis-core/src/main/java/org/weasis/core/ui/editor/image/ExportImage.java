@@ -153,11 +153,21 @@ public class ExportImage<E extends ImageElement> extends DefaultView2d<E> {
     Point2D offset = getClipViewCoordinatesOffset();
     g2d.translate(offset.getX(), offset.getY());
 
-    // TODO fix rotation issue
     Integer rotationAngle = (Integer) actionsInView.get(ActionW.ROTATION.cmd());
-    if ((rotationAngle == null || rotationAngle == 0)
-        && g2d.getClass().getName().contains("print")) {
-      imageLayer.drawImageForPrinter(g2d, imagePrintingResolution, this);
+    boolean isPrintGraphics = g2d.getClass().getName().contains("print");
+    if (isPrintGraphics) {
+      // Apply rotation to printer graphics for correct output with rotated images
+      if (rotationAngle != null && rotationAngle != 0) {
+        Graphics2D printCopy = (Graphics2D) g2d.create();
+        try {
+          printCopy.rotate(Math.toRadians(rotationAngle));
+          imageLayer.drawImageForPrinter(printCopy, imagePrintingResolution, this);
+        } finally {
+          printCopy.dispose();
+        }
+      } else {
+        imageLayer.drawImageForPrinter(g2d, imagePrintingResolution, this);
+      }
     } else {
       imageLayer.drawImage(g2d);
     }

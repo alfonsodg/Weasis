@@ -411,8 +411,37 @@ public class Launcher {
         return;
       }
       boolean isMac = compatibility == Compatibility.MAC;
-      List<String> command =
-          new ArrayList<>(Arrays.asList(binaryPath.trim().split("\\s+"))); // NON-NLS
+      // Validate binary path exists
+      File binaryFile = new File(binaryPath.trim());
+      if (!binaryFile.isAbsolute()) {
+        // Try to resolve from PATH
+        String pathCmd = SystemInfo.isWindows ? "where" : "which";
+        try {
+          Process whichProc = new ProcessBuilder(pathCmd, binaryPath.trim()).start();
+          if (whichProc.waitFor(5, TimeUnit.SECONDS)) {
+            try (BufferedReader reader =
+                new BufferedReader(new InputStreamReader(whichProc.getInputStream()))) {
+              String resolved = reader.readLine();
+              if (StringUtil.hasText(resolved)) {
+                binaryFile = new File(resolved);
+              }
+            }
+          }
+        } catch (Exception e) {
+          LOGGER.debug("Cannot resolve binary path from PATH: {}", binaryPath);
+        }
+      }
+      if (!binaryFile.canExecute()) {
+        LOGGER.warn("Binary not found or not executable: {}", binaryPath);
+        JOptionPane.showMessageDialog(
+            GuiUtils.getUICore().getBaseArea(),
+            String.format(Messages.getString("error.launching.app"), binaryPath),
+            Messages.getString("launcher.error"),
+            JOptionPane.ERROR_MESSAGE);
+        return;
+      }
+      List<String> command = new ArrayList<>();
+      command.add(binaryFile.getAbsolutePath());
       if (!isMac && parameters != null && !parameters.isEmpty()) {
         for (String param : parameters) {
           command.add(resolvePlaceholders(param, eventManager));
@@ -421,7 +450,12 @@ public class Launcher {
 
       ProcessBuilder processBuilder = new ProcessBuilder(command);
       if (StringUtil.hasText(workingDirectory)) {
-        processBuilder.directory(new File(workingDirectory));
+        File workDir = new File(workingDirectory);
+        if (workDir.isDirectory()) {
+          processBuilder.directory(workDir);
+        } else {
+          LOGGER.warn("Working directory does not exist: {}", workingDirectory);
+        }
       }
       if (environmentVariables != null && !environmentVariables.isEmpty()) {
         Map<String, String> environment = processBuilder.environment();

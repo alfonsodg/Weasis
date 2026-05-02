@@ -124,6 +124,13 @@ jobs:
           p12-file-base64: ${{ secrets.MACOS_CERTIFICATE_INSTALLER }}
           p12-password: ${{ secrets.MACOS_CERTIFICATE_PWD }}
 
+      - name: Post-import cleanup (remove keychain password from env)
+        if: matrix.wsystem == 'macosx'
+        shell: bash
+        run: |
+          # Clear the cert password from environment to reduce exposure
+          unset MACOS_CERTIFICATE_PWD || true
+
       - name: Build app binary with jpackage
         shell: bash
         env:

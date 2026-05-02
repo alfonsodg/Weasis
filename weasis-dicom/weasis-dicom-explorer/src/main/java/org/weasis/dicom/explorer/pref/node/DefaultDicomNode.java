@@ -105,7 +105,6 @@ public class DefaultDicomNode extends AbstractDicomNode {
     writer.writeAttribute(T_HOST, hostname);
     writer.writeAttribute(T_PORT, Integer.toString(port));
 
-    // writer.writeAttribute("tlsOptions", StringUtil.getEmpty2NullObject(printer.getTlsOptions()));
   }
 
   public static DefaultDicomNode buildDicomNodeEx(XMLStreamReader xmler) {
@@ -118,7 +117,7 @@ public class DefaultDicomNode extends AbstractDicomNode {
             UsageType.valueOf(xmler.getAttributeValue(null, T_USAGE_TYPE)));
     node.setTsuid(TransferSyntax.getTransferSyntax(xmler.getAttributeValue(null, T_TSUID)));
 
-    // TODO add tls
+    // TLS options are loaded separately via setTlsOptions()
     return node;
   }
 }

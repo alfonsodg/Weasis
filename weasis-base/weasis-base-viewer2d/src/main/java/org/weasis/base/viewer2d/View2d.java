@@ -421,7 +421,7 @@ public class View2d extends DefaultView2d<ImageElement> {
           View2dContainer existingPlugin = findPluginForGroup(parentGroup);
           if (existingPlugin != null) {
             existingPlugin.setSelectedAndGetFocus();
-            @SuppressWarnings("unchecked")
+            @SuppressWarnings("unchecked") // Series seq is always ImageElement for this viewer
             MediaSeries<ImageElement> imageSeries = (MediaSeries<ImageElement>) seq;
             existingPlugin.addSeries(imageSeries);
             return false;

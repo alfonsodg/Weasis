@@ -83,8 +83,8 @@ public abstract class NativeCache<K, V extends PlanarImage> extends AbstractMap<
     return result;
   }
 
-  @SuppressWarnings("unchecked")
   @Override
+  @SuppressWarnings("unchecked") // Safe: key type matches map declaration
   public V remove(Object key) {
     V val = hash.remove(key);
     useNativeMemory.addAndGet(-physicalBytes(val));
@@ -128,8 +128,7 @@ public abstract class NativeCache<K, V extends PlanarImage> extends AbstractMap<
     if (this == obj) return true;
     if (!super.equals(obj)) return false;
     if (getClass() != obj.getClass()) return false;
-    @SuppressWarnings("rawtypes")
-    NativeCache other = (NativeCache) obj;
+    NativeCache<?, ?> other = (NativeCache<?, ?>) obj;
     return hash.equals(other.hash);
   }
 }

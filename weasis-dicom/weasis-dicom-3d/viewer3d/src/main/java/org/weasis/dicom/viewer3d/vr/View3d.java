@@ -787,11 +787,16 @@ public class View3d extends VolumeCanvas
   }
 
   public void dispose(GLAutoDrawable drawable) {
-    // GL4 gl2 = drawable.getGL().getGL4();
-    // FIXME destroy when release of cache
-    //    if (volTexture != null) {
-    //      volTexture.destroy(gl2);
-    //    }
+    // Clean up volume texture when GL context is disposed to prevent GPU memory leak
+    if (volTexture != null) {
+      try {
+        GL4 gl2 = drawable.getGL().getGL4();
+        volTexture.destroy(gl2);
+        volTexture = null;
+      } catch (Exception e) {
+        LOGGER.error("Cannot destroy volume texture", e);
+      }
+    }
   }
 
   public void updateSegmentation() {}

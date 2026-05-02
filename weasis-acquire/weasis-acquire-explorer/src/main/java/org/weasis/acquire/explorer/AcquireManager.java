@@ -550,22 +550,39 @@ public class AcquireManager {
     // http://dicom.nema.org/medical/dicom/current/output/chtml/part19/chapter_A.html
     if (tag instanceof TagSeq && node.hasChildNodes()) {
       NodeList nodeList = node.getChildNodes();
-      Attributes attributes = new Attributes();
-      attributes.setString(Tag.SpecificCharacterSet, VR.CS, "ISO_IR 192"); // NON-NLS
-      // FIXME handle only one sequence element
-      Attributes[] list = new Attributes[1];
+      List<Attributes> seqItems = new ArrayList<>();
+      Attributes currentItem = new Attributes();
+      currentItem.setString(Tag.SpecificCharacterSet, VR.CS, "ISO_IR 192"); // NON-NLS
       for (int i = 0; i < nodeList.getLength(); i++) {
         Node n = nodeList.item(i);
         if (n != null) {
-          Optional.ofNullable(TagD.get(n.getNodeName()))
-              .ifPresent(
-                  t ->
-                      attributes.setValue(
-                          t.getId(), ElementDictionary.vrOf(t.getId(), null), n.getTextContent()));
+          if ("item".equals(n.getNodeName())) {
+            // Start a new sequence item
+            if (!currentItem.isEmpty()) {
+              seqItems.add(
+                  currentItem.getParent() == null
+                      ? currentItem
+                      : new Attributes(currentItem));
+            }
+            currentItem = new Attributes();
+            currentItem.setString(Tag.SpecificCharacterSet, VR.CS, "ISO_IR 192");
+          } else {
+            Optional.ofNullable(TagD.get(n.getNodeName()))
+                .ifPresent(
+                    t ->
+                        currentItem.setValue(
+                            t.getId(),
+                            ElementDictionary.vrOf(t.getId(), null),
+                            n.getTextContent()));
+          }
         }
       }
-      list[0] = attributes.getParent() == null ? attributes : new Attributes(attributes);
-      def.setTagNoNull(tag, list);
+      // Add last item
+      if (!currentItem.isEmpty()) {
+        seqItems.add(
+            currentItem.getParent() == null ? currentItem : new Attributes(currentItem));
+      }
+      def.setTagNoNull(tag, seqItems.toArray(new Attributes[0]));
 
     } else {
       tag.readValue(node.getTextContent(), def);
