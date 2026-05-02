@@ -419,7 +419,10 @@ public class View2dContainer extends ImageViewerPlugin<ImageElement>
       return createDefaultView(clazz);
     }
     try {
-      // FIXME use classloader.loadClass or injection
+      BundleContext ctx = AppProperties.getBundleContext(View2dContainer.class);
+      if (ctx != null) {
+        return buildInstance(ctx.getBundle().loadClass(clazz));
+      }
       return buildInstance(Class.forName(clazz));
 
     } catch (Exception e) {

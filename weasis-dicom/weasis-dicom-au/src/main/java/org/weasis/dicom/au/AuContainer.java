@@ -270,8 +270,14 @@ public class AuContainer extends DicomViewerPlugin implements PropertyChangeList
   @Override
   public JComponent createComponent(String clazz) {
     try {
-      // FIXME use classloader.loadClass or injection
-      JComponent component = buildInstance(Class.forName(clazz));
+      BundleContext ctx = AppProperties.getBundleContext(AuContainer.class);
+      Class<?> viewClass;
+      if (ctx != null) {
+        viewClass = ctx.getBundle().loadClass(clazz);
+      } else {
+        viewClass = Class.forName(clazz);
+      }
+      JComponent component = buildInstance(viewClass);
       if (component instanceof AuView view) {
         auview = view;
       }

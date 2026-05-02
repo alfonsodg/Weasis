@@ -213,11 +213,16 @@ public class DicomDirImport extends AbstractItemDialogPage implements ImportDico
   public static File getDcmDirFromMedia() {
     final List<File> dvs = new ArrayList<>();
     try {
-      if (SystemInfo.isWindows) {
-        dvs.addAll(Arrays.asList(File.listRoots()));
-      } else if (SystemInfo.isMacOS) {
+      // Start with all root directories (portable across all platforms)
+      File[] roots = File.listRoots();
+      if (roots != null) {
+        Collections.addAll(dvs, roots);
+      }
+
+      // Add platform-specific mount points for removable media
+      if (SystemInfo.isMacOS) {
         addFiles(dvs, new File("/Volumes"));
-      } else {
+      } else if (SystemInfo.isLinux) {
         addFiles(dvs, new File("/media"));
         addFiles(dvs, new File("/mnt"));
         String user = System.getProperty("user.name", "local"); // NON-NLS

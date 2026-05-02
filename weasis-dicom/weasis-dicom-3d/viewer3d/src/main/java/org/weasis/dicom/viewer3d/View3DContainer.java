@@ -571,9 +571,14 @@ public class View3DContainer extends DicomViewerPlugin
     }
 
     try {
-      // FIXME use classloader.loadClass or injection
-      Class cl = Class.forName(clazz);
-      JComponent component = (JComponent) cl.newInstance();
+      BundleContext ctx = AppProperties.getBundleContext(View3DContainer.class);
+      Class<?> cl;
+      if (ctx != null) {
+        cl = ctx.getBundle().loadClass(clazz);
+      } else {
+        cl = Class.forName(clazz);
+      }
+      JComponent component = (JComponent) cl.getDeclaredConstructor().newInstance();
       if (component instanceof SeriesViewerListener) {
         eventManager.addSeriesViewerListener((SeriesViewerListener) component);
       }

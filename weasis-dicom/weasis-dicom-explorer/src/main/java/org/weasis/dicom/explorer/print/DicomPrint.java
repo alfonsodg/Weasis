@@ -325,8 +325,6 @@ public class DicomPrint {
 
     storeRasterInDicom(image, dicomImage, printOptions.isColorPrint());
 
-    // writeDICOM(new File("/tmp/print.dcm"), dicomImage);
-
     String weasisAet = selectedItem == null ? "WEASIS_AE" : selectedItem.getAeTitle(); // NON-NLS
     Device device = new Device(weasisAet);
     ApplicationEntity ae = new ApplicationEntity(weasisAet);

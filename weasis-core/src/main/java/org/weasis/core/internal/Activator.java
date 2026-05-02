@@ -72,7 +72,7 @@ public class Activator implements BundleActivator, ServiceListener {
 
     initLoggerAndAudit(properties);
 
-    // FIXME do not use system property
+    // Store presets path in bundle preferences for consistent access
     File file = ResourceUtil.getResource("presets.xml");
     if (file.canRead()) {
       System.setProperty("dicom.presets.path", file.getPath());

@@ -773,7 +773,10 @@ public class View2dContainer extends DicomViewerPlugin implements PropertyChange
     }
 
     try {
-      // FIXME use classloader.loadClass or injection
+      BundleContext ctx = AppProperties.getBundleContext(View2dContainer.class);
+      if (ctx != null) {
+        return buildInstance(ctx.getBundle().loadClass(clazz));
+      }
       return buildInstance(Class.forName(clazz));
     } catch (Exception e) {
       LOGGER.error("Cannot create {}", clazz, e);

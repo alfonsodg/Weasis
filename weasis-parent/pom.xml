@@ -125,12 +125,14 @@
               </goals>
             </execution>
           </executions>
-          <configuration>
+           <configuration>
             <bnd>
               -noextraheaders: true
               -snapshot: SNAPSHOT
               -includeresource.all = -src/main/resources
-              Import-Package: org.slf4j;version=!,*
+              Export-Package: *
+              -exportcontents: *
+              Import-Package: org.slf4j;version="[2.0,3)",ch.qos.logback;version="[1.5,2)",*
             </bnd>
           </configuration>
         </plugin>

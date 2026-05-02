@@ -33,19 +33,8 @@ public class DrawingsKeyListeners implements KeyListener {
     } else if (sm.matches(ShortcutManager.ID_DRAW_SELECT_ALL, e)) {
       graphicManager.setSelectedAllGraphics();
     }
-    // FIXME arrows is already used with pan!
-    // else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-    // layerModel.moveSelectedGraphics(-1, 0);
-    // }
-    // else if (e.getKeyCode() == KeyEvent.VK_UP) {
-    // layerModel.moveSelectedGraphics(0, -1);
-    // }
-    // else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-    // layerModel.moveSelectedGraphics(1, 0);
-    // }
-    // else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-    // layerModel.moveSelectedGraphics(0, 1);
-    // }
+    // Arrow keys are reserved for pan operations. Nudge of selected graphics
+    // via arrow keys could be implemented here when not in pan mode.
   }
 
   @Override

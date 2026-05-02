@@ -382,20 +382,7 @@ public class HistogramView extends JComponent
     }
   }
 
-  // TODO remove
-  //  private void exportcsv(PlanarImage imageSource) {
-  //    File csvOutputFile = new File("/tmp/" + "image" + ".csv"); // NON-NLS
-  //    try (PrintWriter pw = new PrintWriter(csvOutputFile)) {
-  //      short[] pix = new short[imageSource.width()];
-  //      for (int i = 0; i < imageSource.height(); i++) {
-  //        imageSource.get(i, 0, pix);
-  //        IntStream is = IntStream.range(0, pix.length).map(k -> pix[k]);
-  //        pw.println(is.mapToObj(String::valueOf).collect(Collectors.joining(",")));
-  //      }
-  //    } catch (FileNotFoundException e) {
-  //      LOGGER.error("", e);
-  //    }
-  //  }
+
 
   @Override
   public void handle(List<Graphic> selectedGraphicList, MeasurableLayer layer) {

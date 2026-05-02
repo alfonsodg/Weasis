@@ -369,7 +369,10 @@ public class MprContainer extends DicomViewerPlugin
     }
 
     try {
-      // FIXME use classloader.loadClass or injection
+      BundleContext ctx = AppProperties.getBundleContext(MprContainer.class);
+      if (ctx != null) {
+        return buildInstance(ctx.getBundle().loadClass(clazz));
+      }
       return buildInstance(Class.forName(clazz));
 
     } catch (Exception e) {
