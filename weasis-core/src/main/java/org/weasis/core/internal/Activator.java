@@ -33,6 +33,7 @@ import org.osgi.service.prefs.Preferences;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.weasis.core.api.explorer.model.AbstractFileModel;
+import org.weasis.core.api.gui.util.AccessibilityHelper;
 import org.weasis.core.api.gui.util.AppProperties;
 import org.weasis.core.api.gui.util.GuiExecutor;
 import org.weasis.core.api.gui.util.GuiUtils;
@@ -105,6 +106,8 @@ public class Activator implements BundleActivator, ServiceListener {
 
     bundleContext.addServiceListener(
         this, BundleTools.createServiceFilter(Codec.class, SeriesViewerFactory.class));
+
+    initAccessibility();
   }
 
   @Override
@@ -230,5 +233,13 @@ public class Activator implements BundleActivator, ServiceListener {
         auditLogger.setLevel(Level.OFF);
       }
     }
+  }
+
+  private static void initAccessibility() {
+    GuiExecutor.execute(
+        () -> {
+          AccessibilityHelper.initAccessibility();
+          LOGGER.info("Accessibility support initialized");
+        });
   }
 }

@@ -9,10 +9,14 @@
  */
 package org.weasis.dicom.explorer;
 
+import org.weasis.dicom.explorer.hanging.HangingProtocolEngine;
+
 public class HangingProtocols {
 
   /** Key for the "close previous viewers" flag in local persistence. */
   public static final String CLOSE_PREVIOUS_KEY = "weasis.open.viewer.clean";
+
+  private static final HangingProtocolEngine engine = new HangingProtocolEngine();
 
   /**
    * Controls whether a viewer tab should be opened for a patient.
@@ -24,6 +28,14 @@ public class HangingProtocols {
   public enum OpeningViewer {
     NONE,
     ALL_PATIENTS
+  }
+
+  public static HangingProtocolEngine getEngine() {
+    return engine;
+  }
+
+  public static String evaluateLayout(String modality, String bodyPart, int seriesCount) {
+    return engine.evaluate(modality, bodyPart, seriesCount);
   }
 
   public static boolean isClosePreviousFromPreferences() {
