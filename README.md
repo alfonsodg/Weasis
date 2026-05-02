@@ -23,6 +23,12 @@
 * [Download binary releases](https://nroduit.github.io/en/getting-started/download-dicom-viewer)
 * [Live Demo with different datasets](https://nroduit.github.io/en/demo)
 
+## Documentation
+
+* [Software Architecture](docs/ARCHITECTURE.md) — IEC 62304 compliant architecture, C4 diagrams, module responsibilities, data flows, security architecture, and deployment view.
+* [DICOM Conformance Statement](docs/DICOM_CONFORMANCE.md) — Full DICOM PS3.2 conformance statement: 70+ SOP Classes, 26 Transfer Syntaxes, DICOMWeb capabilities (QIDO-RS, WADO-RS, STOW-RS), IHE profiles, security profiles.
+* [Risk Assessment](docs/RISK_ASSESSMENT.md) — ISO 14971:2019 risk management: 20 hazard scenarios across 10 clinical functions, 14 risk control measures, residual risk evaluation.
+
 ## Release History
 See [CHANGELOG](CHANGELOG.md)
 
