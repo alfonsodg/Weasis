@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes>
+  <!--
+    Default DICOM Calling Node: dcm4chee PACS Archive
+    ==================================================
+    Server: gdevel (devel-ccvass.us-central1-c.c.ccvass.internal)
+    IP: 34.121.88.223
+    DICOM: DCM4CHEE@gdevel:11112
+    
+    This node provides C-FIND (query), C-MOVE (retrieve), C-STORE (send)
+    over standard DICOM protocol.
+  -->
+  <node
+    description="dcm4chee Local PACS"
+    type="DICOM"
+    usageType="BOTH"
+    aeTitle="DCM4CHEE"
+    hostname="gdevel"
+    port="11112"
+    tsuid="" />
+</nodes>

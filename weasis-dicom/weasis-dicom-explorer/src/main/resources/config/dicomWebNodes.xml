@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes>
+  <!--
+    Default DICOMWeb Node: dcm4chee PACS Archive
+    ============================================
+    Server: gdevel (devel-ccvass.us-central1-c.c.ccvass.internal)
+    IP: 34.121.88.223
+    DICOM: DCM4CHEE@gdevel:11112
+    DICOMWeb: http://dcm4chee.gdevel:8080/dcm4chee-arc/aets/DCM4CHEE/rs
+    
+    This node provides QIDO-RS (query), WADO-RS (retrieve), and STOW-RS (store)
+    via a single DICOMWeb endpoint.
+  -->
+  <node
+    description="dcm4chee Local PACS"
+    type="WEB"
+    usageType="BOTH"
+    url="http://dcm4chee.gdevel:8080/dcm4chee-arc/aets/DCM4CHEE/rs"
+    webtype="DICOMWEB"
+    auth="5aa85854-8f1f-11eb-b339-d3daace59a05"
+    headers=""
+    tsuid="1.2.840.10008.1.2.1" />
+    
+  <node
+    description="dcm4chee STOW-RS"
+    type="WEB"
+    usageType="STORAGE"
+    url="http://dcm4chee.gdevel:8080/dcm4chee-arc/aets/DCM4CHEE/rs"
+    webtype="STOWRS"
+    auth="5aa85854-8f1f-11eb-b339-d3daace59a05"
+    headers=""
+    tsuid="1.2.840.10008.1.2.1" />
+    
+  <node
+    description="dcm4chee WADO-RS"
+    type="WEB"
+    usageType="RETRIEVE"
+    url="http://dcm4chee.gdevel:8080/dcm4chee-arc/aets/DCM4CHEE/rs"
+    webtype="WADORS"
+    auth="5aa85854-8f1f-11eb-b339-d3daace59a05"
+    headers=""
+    tsuid="1.2.840.10008.1.2.1" />
+    
+  <node
+    description="dcm4chee QIDO-RS"
+    type="WEB"
+    usageType="RETRIEVE"
+    url="http://dcm4chee.gdevel:8080/dcm4chee-arc/aets/DCM4CHEE/rs"
+    webtype="QIDORS"
+    auth="5aa85854-8f1f-11eb-b339-d3daace59a05"
+    headers=""
+    tsuid="1.2.840.10008.1.2.1" />
+</nodes>
